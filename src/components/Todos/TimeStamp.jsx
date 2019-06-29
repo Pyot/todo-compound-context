@@ -3,7 +3,7 @@ import { TodoConsumer } from "./Todos";
 
 const TimeStamp = ({timeStamp}) => (
   <TodoConsumer>
-    {() => <span className="todo-timestamp">{timeStamp}</span>}
+    {() => <div className="todo-timestamp col-4">{timeStamp}</div>}
   </TodoConsumer>
 );
 

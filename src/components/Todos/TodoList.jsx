@@ -6,7 +6,7 @@ class TodoList extends Component {
       return (
         <div>
           <ol className="todo-list">
-            <TodoConsumer>{this.props.children}</TodoConsumer>
+                <TodoConsumer>{this.props.children}</TodoConsumer>
           </ol>
         </div>
       );

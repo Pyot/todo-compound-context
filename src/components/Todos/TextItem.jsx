@@ -4,22 +4,21 @@ import { TodoConsumer } from "./Todos";
 
 const Text = ({ text, changeEditMode }) => (
     <TodoConsumer>
-      {() => <div onDoubleClick={changeEditMode}>
-        {text}
-      </div>}
+        {() => <div className={'col-4'} onDoubleClick={changeEditMode}>
+                    {text}
+                </div>}
     </TodoConsumer>
-  );
+);
 
 class TextItem extends Component {
     state = {
-      isInEditMode: false
+        isInEditMode: false
     }
-  
+
     render() {
-      const { text } = this.props
+        const { text } = this.props
         return <Text text={text} />
     }
-  }
-  
-  export default TextItem;
-  
+}
+
+export default TextItem;
