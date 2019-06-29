@@ -4,6 +4,7 @@ import TodoList from './TodoList'
 import Item from './Item'
 import TimeStamp from './TimeStamp'
 import TextItem from "./TextItem";
+import Completed from "./Completed"
 
 
 import { v4 } from 'uuid'
@@ -18,6 +19,7 @@ class Todos extends Component {
     static Item = Item;
     static TimeStamp =  TimeStamp;
     static Text = TextItem;
+    static Completed = Completed;
 
     addTodo = () => {
         const { input } = this.state;

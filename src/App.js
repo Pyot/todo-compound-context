@@ -14,6 +14,8 @@ function App() {
             <Todos.Item key={v4()} id={todo.id}>
                <Todos.TimeStamp timeStamp={todo.timestamp} />
                <Todos.Text text={todo.text} />
+               <Todos.Completed completed={todo.completed} />
+
             </Todos.Item>
               
           ))}
