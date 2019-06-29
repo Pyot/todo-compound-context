@@ -15,6 +15,7 @@ function App() {
                <Todos.TimeStamp timeStamp={todo.timestamp} />
                <Todos.Text text={todo.text} />
                <Todos.Completed completed={todo.completed} />
+               <Todos.Remove todoId={todo.id}/>
 
             </Todos.Item>
               

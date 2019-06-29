@@ -3,8 +3,9 @@ import Control from './Control'
 import TodoList from './TodoList'
 import Item from './Item'
 import TimeStamp from './TimeStamp'
-import TextItem from "./TextItem";
+import TextItem from "./TextItem"
 import Completed from "./Completed"
+import Remove from "./Remove"
 
 
 import { v4 } from 'uuid'
@@ -20,6 +21,7 @@ class Todos extends Component {
     static TimeStamp =  TimeStamp;
     static Text = TextItem;
     static Completed = Completed;
+    static Remove = Remove;
 
     addTodo = () => {
         const { input } = this.state;
@@ -38,6 +40,14 @@ class Todos extends Component {
         }));
     };
 
+    removeTodo = (e) => {
+        let id = e.target.parentNode.parentNode.id;
+        console.log(id)
+        this.setState({ 
+          todos: this.state.todos.filter(todo => todo.id !== id)
+        })
+      };
+
     updateInput = event => {
         const { value } = event.target;
         this.setState({ input: value });
@@ -48,7 +58,8 @@ class Todos extends Component {
         todos: [{ text: 'First task', timestamp: '12/02/2019', completed: false, id: v4() },
         { text: 'Second task', timestamp: '13/02/2019', completed: true, id: v4() }],
         addTodo: this.addTodo,
-        updateInput: this.updateInput
+        updateInput: this.updateInput,
+        removeTodo: this.removeTodo,
     };
 
     render() {
