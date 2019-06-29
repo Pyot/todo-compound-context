@@ -1,12 +1,15 @@
 import React, { Component, createContext } from "react";
 import Control from './Control';
+import TodoList from './TodoList'
 import { v4 } from 'uuid';
+
 const TodoContext = createContext();
 export const TodoConsumer = TodoContext.Consumer;
 
 
 class Todos extends Component {
-    static Control = Control
+    static Control = Control;
+    static TodoList =  TodoList;
 
     addTodo = () => {
         const { input } = this.state;
