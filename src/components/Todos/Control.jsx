@@ -4,14 +4,14 @@ import { Input, InputGroup, InputGroupAddon, InputGroupText } from "reactstrap";
 
 const Control = () => (
     <TodoConsumer>
-      {() => (
-        <InputGroup>
-        <Input className={"col-6"} type="text"   />
-          <InputGroupAddon addonType="append">
-            <InputGroupText >Add</InputGroupText>
-          </InputGroupAddon>
-        </InputGroup>
-      )}
+      {({ input, updateInput, addTodo }) => (
+      <InputGroup>
+      <Input className={"col-6"} type="text" value={input} onChange={updateInput} />
+        <InputGroupAddon addonType="append">
+          <InputGroupText onClick={addTodo}>Add</InputGroupText>
+        </InputGroupAddon>
+      </InputGroup>
+    )}
     </TodoConsumer>
   );
 
