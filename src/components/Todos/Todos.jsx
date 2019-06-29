@@ -1,7 +1,12 @@
-import React, { Component, createContext } from "react";
-import Control from './Control';
+import React, { Component, createContext } from "react"
+import Control from './Control'
 import TodoList from './TodoList'
-import { v4 } from 'uuid';
+import Item from './Item'
+import TimeStamp from './TimeStamp'
+import TextItem from "./TextItem";
+
+
+import { v4 } from 'uuid'
 
 const TodoContext = createContext();
 export const TodoConsumer = TodoContext.Consumer;
@@ -10,6 +15,9 @@ export const TodoConsumer = TodoContext.Consumer;
 class Todos extends Component {
     static Control = Control;
     static TodoList =  TodoList;
+    static Item = Item;
+    static TimeStamp =  TimeStamp;
+    static Text = TextItem;
 
     addTodo = () => {
         const { input } = this.state;
