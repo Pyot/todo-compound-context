@@ -42,7 +42,6 @@ class Todos extends Component {
 
     removeTodo = (e) => {
         let id = e.target.parentNode.parentNode.id;
-        console.log(id)
         this.setState({ 
           todos: this.state.todos.filter(todo => todo.id !== id)
         })
@@ -53,6 +52,23 @@ class Todos extends Component {
         this.setState({ input: value });
     };
 
+    completedTodo = (e) => {
+        let id = e.target.parentNode.parentNode.parentNode.id;
+        console.log(id)
+        this.setState({
+          todos: this.state.todos.map(todo => {
+            if(todo.id === id ){
+              return {
+                ...todo,
+                completed: !todo.completed }
+              } else {
+                return todo;
+              }
+            }
+          )
+        })  
+      }
+
     state = {
         input: "",
         todos: [{ text: 'First task', timestamp: '12/02/2019', completed: false, id: v4() },
@@ -60,6 +76,7 @@ class Todos extends Component {
         addTodo: this.addTodo,
         updateInput: this.updateInput,
         removeTodo: this.removeTodo,
+        completedTodo: this.completedTodo
     };
 
     render() {
