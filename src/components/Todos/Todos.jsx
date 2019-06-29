@@ -1,10 +1,12 @@
 import React, { Component, createContext } from "react";
+import Control from './Control';
 
 const TodoContext = createContext();
 export const TodoConsumer = TodoContext.Consumer;
 
 
 class Todos extends Component {
+    static Control = Control
 
     state = {
         input: "",

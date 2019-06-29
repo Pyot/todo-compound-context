@@ -6,7 +6,7 @@ function App() {
   return (
     <div className="App">
         <Todos>
-          <div>Todo</div>
+          <Todos.Control/>
       </Todos>
     </div>
   );
