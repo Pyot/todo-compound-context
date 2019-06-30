@@ -6,9 +6,12 @@ import TimeStamp from './TimeStamp'
 import TextItem from "./TextItem"
 import Completed from "./Completed"
 import Remove from "./Remove"
+import DndList from "./DndList"
 
 
 import { v4 } from 'uuid'
+import arrayMove from 'array-move';
+
 
 const TodoContext = createContext();
 export const TodoConsumer = TodoContext.Consumer;
@@ -22,6 +25,7 @@ class Todos extends Component {
   static Text = TextItem;
   static Completed = Completed;
   static Remove = Remove;
+  static DndList = DndList;
 
   componentWillMount() {
     this.setState({ todosFilter: this.state.todos })
@@ -158,6 +162,12 @@ class Todos extends Component {
     })
   }
 
+  onSortEnd = ({oldIndex, newIndex}) => {
+    this.setState(({todosFilter}) => ({
+      todosFilter: arrayMove(todosFilter, oldIndex, newIndex),
+    }));
+  };
+
   state = {
     input: "",
     search: "",
@@ -180,7 +190,8 @@ class Todos extends Component {
     completedTodo: this.completedTodo,
     editItem: this.editItem,
     searchList: this.searchList,
-    updateCheckbox: this.updateCheckbox
+    updateCheckbox: this.updateCheckbox,
+    onSortEnd: this.onSortEnd
 
   };
 
