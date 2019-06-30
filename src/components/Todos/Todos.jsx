@@ -30,8 +30,26 @@ class Todos extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (prevState.todos !== this.state.todos) {
-      this.setState({ todosFilter: this.state.todos })
-    }
+      // this.setState({ todosFilter: this.state.todos })
+      this.updateTodo();
+    };
+    
+    
+  }
+
+  updateTodo = () => {
+    let updatedTodos = [...this.state.todos];
+    console.log(this.state.search)
+
+    updatedTodos = updatedTodos.filter(item => {
+      return item.text.toLowerCase().search(
+        this.state.search) !== -1;
+    });
+    console.log('updatedTodos',updatedTodos)
+    this.setState({ 
+      todosFilter: updatedTodos
+    });
+
   }
 
   searchList = (e) => {
@@ -43,7 +61,10 @@ class Todos extends Component {
         e.target.value.toLowerCase()) !== -1;
     });
 
-    this.setState({ todosFilter: updatedTodos });
+    this.setState({ 
+        todosFilter: updatedTodos,
+        search: e.target.value.toLowerCase()
+      });
   }
 
   updateInput = event => {
@@ -113,6 +134,7 @@ class Todos extends Component {
 
   state = {
     input: "",
+    search: "",
     todos: [{text: 'First task', timestamp: '12/02/2019', completed: false, id: v4()},
     {text: 'Second task', timestamp: '13/02/2019', completed: true, id: v4()}],
     todosFilter: [],
