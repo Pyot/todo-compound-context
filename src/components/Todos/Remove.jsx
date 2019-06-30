@@ -4,7 +4,7 @@ import { Button } from "reactstrap";
 
 const Remove = () => (
   <TodoConsumer>
-    {({ removeTodo }) => <Button onClick={(e)=>{removeTodo(e)}}>Remove</Button>}
+    {({ removeTodo }) => <Button className="ml-3 mr-3 btn-sm" color="danger" onClick={(e)=>{removeTodo(e)}}>Remove</Button>}
   </TodoConsumer>
 );
 

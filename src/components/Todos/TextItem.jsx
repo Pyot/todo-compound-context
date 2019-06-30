@@ -4,17 +4,16 @@ import { Input } from "reactstrap";
 
 const TextEdit = ({ text, changeEditMode, changeEditModeOnEnter }) => (
     <TodoConsumer>
-            {({ editItem }) => <Input onKeyDown={(e)=>changeEditModeOnEnter(e, editItem)} onDoubleClick={(e) => changeEditMode(e)} className={'col-6'} type="text" defaultValue={text} />}
+            {({ editItem }) => <Input onKeyDown={(e)=>changeEditModeOnEnter(e, editItem)} onDoubleClick={(e) => changeEditMode(e)} className="col-5" type="text" defaultValue={text} />}
     </TodoConsumer>
 );
 
 const Text = ({ text, changeEditMode }) => (
     <TodoConsumer>
-        {() => <div className={'col-6'}>
-            <div onDoubleClick={changeEditMode}>
+        {() => <div className="col-5 text-left" onDoubleClick={changeEditMode}>
                 {text}
             </div>
-        </div>}
+        }
     </TodoConsumer>
 );
 

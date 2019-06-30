@@ -1,9 +1,10 @@
 import React from "react";
 import { TodoConsumer } from "./Todos";
+import { Badge } from "reactstrap";
 
 const TimeStamp = ({timeStamp}) => (
   <TodoConsumer>
-    {() => <div className="todo-timestamp col-4">{timeStamp}</div>}
+    {() => <Badge className="todo-timestamp ml-3 mr-3" color="warning">{timeStamp}</Badge>}
   </TodoConsumer>
 );
 

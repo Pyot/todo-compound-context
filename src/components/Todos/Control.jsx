@@ -17,14 +17,15 @@ import {
   UncontrolledDropdown,
   DropdownToggle,
   DropdownMenu,
-  DropdownItem
+  DropdownItem,
+  Badge
 } from "reactstrap";
 
 const ControlView = ({ toggle, isOpen }) => (
   <TodoConsumer>
     {({ input, updateInput, addTodo, searchList, updateCheckbox, checkboxAll, checkboxCompleted, checkboxIncompleted }) => (
       <>
-        <Navbar color="light" light expand="md">
+        <Navbar color="navbar-dark bg-primary" light expand="md">
           <NavbarBrand href="/">ToDo</NavbarBrand>
           <NavbarToggler onClick={toggle} />
           <Collapse isOpen={isOpen} navbar>
@@ -75,9 +76,9 @@ const ControlView = ({ toggle, isOpen }) => (
               </UncontrolledDropdown>
               <NavItem>
                 <NavLink disabled>
-                  {checkboxAll || (!checkboxAll && !checkboxCompleted && !checkboxIncompleted) ? 'All' : ''}
-                  {checkboxCompleted && 'Completed'}
-                  {checkboxIncompleted && 'Incompleted'}
+                  {checkboxAll || (!checkboxAll && !checkboxCompleted && !checkboxIncompleted) ? <Badge color="info">All</Badge> : ''}
+                  {checkboxCompleted && <Badge color="info">Completed</Badge>}
+                  {checkboxIncompleted && <Badge color="info">Incompleted</Badge>}
                 </NavLink>
               </NavItem>
             </Nav>

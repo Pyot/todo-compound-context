@@ -1,11 +1,9 @@
-import React from "react";
-import { TodoConsumer } from "./Todos";
+import React from "react"
+import { TodoConsumer } from "./Todos"
 
 const Completed = ({completed}) => (
   <TodoConsumer>
-    {({completedTodo}) => <div className={'col-2'}>
-            <input type="checkbox" checked={completed}  onChange={(e)=>{completedTodo(e)}}/>
-        </div>}
+    {({completedTodo}) => <input className="ml-3 mr-3" type="checkbox" checked={completed}  onChange={(e)=>{completedTodo(e)}}/>}
   </TodoConsumer>
 );
 
