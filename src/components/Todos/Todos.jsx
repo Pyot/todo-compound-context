@@ -23,48 +23,90 @@ class Todos extends Component {
   static Completed = Completed;
   static Remove = Remove;
 
-
   componentWillMount() {
     this.setState({ todosFilter: this.state.todos })
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (prevState.todos !== this.state.todos) {
-      // this.setState({ todosFilter: this.state.todos })
       this.updateTodo();
     };
-    
-    
+    if(prevState.checkboxAll !== this.state.checkboxAll || 
+      prevState.checkboxCompleted !== this.state.checkboxCompleted || 
+      prevState.checkboxIncompleted !== this.state.checkboxIncompleted){
+        this.updateTodo();
+      }
   }
 
   updateTodo = () => {
+    // It's updating a todosFilter array according on a search phrase and a checkbox filters.  
     let updatedTodos = [...this.state.todos];
-    console.log(this.state.search)
+    const { checkboxAll, checkboxCompleted, checkboxIncompleted } = this.state
+
+    updatedTodos = updatedTodos.filter(item => {
+      if(checkboxAll === true || 
+        (checkboxAll === false && checkboxCompleted === false && checkboxIncompleted === false)){
+        return item
+      } else if(checkboxCompleted === item.completed && checkboxCompleted === true){
+        return item
+      } else if(checkboxIncompleted === !item.completed && checkboxIncompleted === true){
+        return item
+      }
+    })
 
     updatedTodos = updatedTodos.filter(item => {
       return item.text.toLowerCase().search(
         this.state.search) !== -1;
     });
-    console.log('updatedTodos',updatedTodos)
-    this.setState({ 
+
+    this.setState({
       todosFilter: updatedTodos
     });
 
   }
 
+  updateCheckbox = (e) => {
+    let id = e.target.id
+    if(id === "checkbox-all"){
+      this.setState({checkboxAll: !this.state.checkboxAll,
+        checkboxCompleted: false,
+        checkboxIncompleted: false
+        })
+    } else if(id === "checkbox-completed"){
+      this.setState({checkboxAll: false,
+        checkboxCompleted: !this.state.checkboxCompleted,
+        checkboxIncompleted: false})
+    } else if(id === "checkbox-incompleted"){
+      this.setState({checkboxAll: false,
+        checkboxCompleted: false,
+        checkboxIncompleted: !this.state.checkboxIncompleted})
+    }
+  }
+
   searchList = (e) => {
     let updatedTodos = [...this.state.todos];
-    console.log("TCL: Todos -> searchList -> updatedTodos", updatedTodos)
+    const { checkboxAll, checkboxCompleted, checkboxIncompleted } = this.state
 
     updatedTodos = updatedTodos.filter(item => {
       return item.text.toLowerCase().search(
         e.target.value.toLowerCase()) !== -1;
     });
 
-    this.setState({ 
-        todosFilter: updatedTodos,
-        search: e.target.value.toLowerCase()
-      });
+    updatedTodos = updatedTodos.filter(item => {
+      if(checkboxAll === true || 
+        (checkboxAll === false && checkboxCompleted === false && checkboxIncompleted === false)){
+        return item
+      } else if(checkboxCompleted === item.completed && checkboxCompleted === true){
+        return item
+      } else if(checkboxIncompleted === !item.completed && checkboxIncompleted === true){
+        return item
+      }
+    })
+
+    this.setState({
+      todosFilter: updatedTodos,
+      search: e.target.value.toLowerCase()
+    });
   }
 
   updateInput = event => {
@@ -135,16 +177,27 @@ class Todos extends Component {
   state = {
     input: "",
     search: "",
-    todos: [{text: 'First task', timestamp: '12/02/2019', completed: false, id: v4()},
-    {text: 'Second task', timestamp: '13/02/2019', completed: true, id: v4()}],
+    checkboxAll: true,
+    checkboxCompleted: false,
+    checkboxIncompleted: false,
+    todos: [{ text:'Task 1', timestamp: '12/02/2019', completed: false, id: v4() },
+    { text: 'Task 1', timestamp: '12/02/2019', completed: true, id: v4() },
+    { text: 'Task 2', timestamp: '13/02/2019', completed: false, id: v4() },
+    { text: 'Task 2', timestamp: '13/02/2019', completed: true, id: v4() },
+    { text: 'Alabama', timestamp: '13/02/2019', completed: true, id: v4() },
+    { text: 'Czestochowa', timestamp: '13/02/2019', completed: false, id: v4() },
+    { text: 'Warszawa', timestamp: '13/02/2019', completed: true, id: v4() },
+
+    { text: 'New York', timestamp: '13/02/2019', completed: false, id: v4() }],
     todosFilter: [],
     updateInput: this.updateInput,
     addTodo: this.addTodo,
     removeTodo: this.removeTodo,
     completedTodo: this.completedTodo,
     editItem: this.editItem,
-    searchList: this.searchList
-  
+    searchList: this.searchList,
+    updateCheckbox: this.updateCheckbox
+
   };
 
   render() {
