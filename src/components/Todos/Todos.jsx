@@ -87,11 +87,6 @@ class Todos extends Component {
   }
 
   searchList = (e) => {
-    let updatedTodos = [...this.state.todos];
-    const { checkboxAll, checkboxCompleted, checkboxIncompleted } = this.state
-
-   
-
     this.setState({
       search: e.target.value.toLowerCase()
     });

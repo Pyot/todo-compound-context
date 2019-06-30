@@ -4,7 +4,7 @@ import { Input } from "reactstrap";
 
 const TextEdit = ({ text, changeEditMode, changeEditModeOnEnter }) => (
     <TodoConsumer>
-            {({ editItem }) => <Input onKeyDown={changeEditModeOnEnter} onDoubleClick={(e) => changeEditMode(e)} className={'col-6'} type="text" value={text} onChange={(e) => editItem(e)} />}
+            {({ editItem }) => <Input onKeyDown={(e)=>changeEditModeOnEnter(e, editItem)} onDoubleClick={(e) => changeEditMode(e)} className={'col-6'} type="text" defaultValue={text} />}
     </TodoConsumer>
 );
 
@@ -30,8 +30,9 @@ class TextItem extends Component {
         })
     }
 
-    changeEditModeOnEnter = (e) => {
+    changeEditModeOnEnter = (e, editItem) => {
         if (e.key === 'Enter') {
+            editItem(e)
             this.setState({
                 isInEditMode: !this.state.isInEditMode
             })
