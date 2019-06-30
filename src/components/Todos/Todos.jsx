@@ -36,6 +36,9 @@ class Todos extends Component {
       prevState.checkboxIncompleted !== this.state.checkboxIncompleted){
         this.updateTodo();
       }
+    if(prevState.search !== this.state.search){
+      this.updateTodo();
+    }
   }
 
   updateTodo = () => {
@@ -87,24 +90,9 @@ class Todos extends Component {
     let updatedTodos = [...this.state.todos];
     const { checkboxAll, checkboxCompleted, checkboxIncompleted } = this.state
 
-    updatedTodos = updatedTodos.filter(item => {
-      return item.text.toLowerCase().search(
-        e.target.value.toLowerCase()) !== -1;
-    });
-
-    updatedTodos = updatedTodos.filter(item => {
-      if(checkboxAll === true || 
-        (checkboxAll === false && checkboxCompleted === false && checkboxIncompleted === false)){
-        return item
-      } else if(checkboxCompleted === item.completed && checkboxCompleted === true){
-        return item
-      } else if(checkboxIncompleted === !item.completed && checkboxIncompleted === true){
-        return item
-      }
-    })
+   
 
     this.setState({
-      todosFilter: updatedTodos,
       search: e.target.value.toLowerCase()
     });
   }
