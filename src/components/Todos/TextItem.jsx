@@ -4,7 +4,7 @@ import { Input } from "reactstrap";
 
 const TextEdit = ({ text, changeEditMode, changeEditModeOnEnter }) => (
     <TodoConsumer>
-            {({ editItem }) => <Input  onDoubleClick={(e) => changeEditMode(e)} className={'col-6'} type="text" value={text} onChange={(e) => editItem(e)} />}
+            {({ editItem }) => <Input onKeyDown={changeEditModeOnEnter} onDoubleClick={(e) => changeEditMode(e)} className={'col-6'} type="text" value={text} onChange={(e) => editItem(e)} />}
     </TodoConsumer>
 );
 
@@ -25,32 +25,28 @@ class TextItem extends Component {
     }
 
     changeEditMode = (e) => {
-        console.log('changeEditMode')
         this.setState({
             isInEditMode: !this.state.isInEditMode
         })
     }
 
-    // changeEditModeOnEnter = (e) => {
-    //     console.log('changeEditModeOnEnter')
-    //     console.log(e.key)
-    //     if (e.key === 'Enter') {
-    //         this.setState({
-    //             isInEditMode: !this.state.isInEditMode
-    //         })
-    //     }
+    changeEditModeOnEnter = (e) => {
+        if (e.key === 'Enter') {
+            this.setState({
+                isInEditMode: !this.state.isInEditMode
+            })
+        }
 
-    // }
+    }
 
     render() {
-        console.log(this.state.isInEditMode)
         const { text } = this.props
         return this.state.isInEditMode ?
             <TextEdit className={'col-6'}
                 type="text"
                 text={text}
                 changeEditMode={this.changeEditMode}
-                // changeEditModeOnEnter={this.changeEditModeOnEnter} 
+                changeEditModeOnEnter={this.changeEditModeOnEnter} 
                 />
             :
             <Text className={'col-6'} text={text} changeEditMode={this.changeEditMode} />

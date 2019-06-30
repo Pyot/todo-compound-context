@@ -9,9 +9,9 @@ function App() {
         <Todos>
           <Todos.Control/>
           <Todos.TodoList>
-          {({ todos }) =>
-          todos.map((todo) => (
-            <Todos.Item key={v4()} id={todo.id}>
+          {({ todosFilter }) =>
+          todosFilter.map((todo) => (
+            <Todos.Item key={todo.id} id={todo.id}>
                <Todos.TimeStamp timeStamp={todo.timestamp} />
                <Todos.Text text={todo.text} />
                <Todos.Completed completed={todo.completed} />
