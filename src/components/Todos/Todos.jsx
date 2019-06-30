@@ -116,7 +116,7 @@ class Todos extends Component {
   };
 
   removeTodo = (e) => {
-    let id = e.target.parentNode.parentNode.id;
+    let id = e.target.closest(".todo-item").id;
     this.setState({
       todos: this.state.todos.filter(todo => todo.id !== id)
     })
@@ -124,7 +124,7 @@ class Todos extends Component {
 
 
   completedTodo = (e) => {
-    let id = e.target.parentNode.parentNode.parentNode.id;
+    let id = e.target.closest(".todo-item").id;
     this.setState({
       todos: this.state.todos.map(todo => {
         if (todo.id === id) {
@@ -141,7 +141,7 @@ class Todos extends Component {
   }
 
   editItem = (e) => {
-    let id = e.target.parentNode.parentNode.id;
+    let id = e.target.closest(".todo-item").id;
     let value = e.target.value
     this.setState({
       todos: this.state.todos.map(todo => {
