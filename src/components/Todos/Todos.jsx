@@ -16,45 +16,52 @@ export const TodoConsumer = TodoContext.Consumer;
 
 class Todos extends Component {
     static Control = Control;
-    static TodoList =  TodoList;
+    static TodoList = TodoList;
     static Item = Item;
-    static TimeStamp =  TimeStamp;
+    static TimeStamp = TimeStamp;
     static Text = TextItem;
     static Completed = Completed;
     static Remove = Remove;
 
-    addTodo = () => {
-        const { input } = this.state;
-        if (input === "") return;
-        this.setState(() => ({
-            input: "",
-            todos: [
-                ...this.state.todos,
-                {
-                    text: input,
-                    timestamp: new Date().toLocaleDateString(),
-                    completed: false,
-                    id: v4()
-                }
-            ]
-        }));
-    };
 
-    removeTodo = (e) => {
-        let id = e.target.parentNode.parentNode.id;
-        this.setState({ 
-          todos: this.state.todos.filter(todo => todo.id !== id)
-        })
-      };
+    componentDidUpdate(prevProps, prevState) {
+      if(prevState.todos !== this.state.todos){
+        this.setState({todosFilter: this.state.todos})
+      }
+    }
 
     updateInput = event => {
         const { value } = event.target;
         this.setState({ input: value });
-    };
-
-    completedTodo = (e) => {
-        let id = e.target.parentNode.parentNode.parentNode.id;
-        console.log(id)
+      };
+    
+      addTodo = () => {
+        const { input } = this.state;
+        if (input === "") return;
+        this.setState(prevState => ({
+          input: "",
+          todos: [
+            ...prevState.todos,
+            {
+              text: input,
+              timestamp: new Date().toLocaleDateString(),
+              completed: false,
+              id: v4()
+            }
+          ]
+        }));
+      };
+    
+      removeTodo = (e) => {
+        let id = e.target.parentNode.id;
+        this.setState({ 
+          todos: this.state.todos.filter(todo => todo.id !== id)
+        })
+      };
+    
+    
+      completedTodo = (e) => {
+        let id = e.target.parentNode.id;
         this.setState({
           todos: this.state.todos.map(todo => {
             if(todo.id === id ){
@@ -68,29 +75,54 @@ class Todos extends Component {
           )
         })  
       }
+    
+      editItem = (e) => {
+        e.preventDefault();
 
-    state = {
+        let id = e.target.parentNode.id;
+
+        console.log("TCL: Todos -> editItem -> id", id)
+        let value = e.target.value
+        this.setState({
+          todos: this.state.todos.map(todo => {
+            if(todo.id === id ){
+              return {
+                ...todo,
+                text: value }
+              } else {
+                return todo;
+              }
+            }
+          )
+        }) 
+      }
+    
+      state = {
         input: "",
-        todos: [{ text: 'First task', timestamp: '12/02/2019', completed: false, id: v4() },
-        { text: 'Second task', timestamp: '13/02/2019', completed: true, id: v4() }],
-        addTodo: this.addTodo,
+        todos: [{text: 'First task', timestamp: '12/02/2019', completed: false, id: v4()},
+        {text: 'Second task', timestamp: '13/02/2019', completed: true, id: v4() }],
         updateInput: this.updateInput,
+        addTodo: this.addTodo,
         removeTodo: this.removeTodo,
-        completedTodo: this.completedTodo
-    };
-
-    render() {
+        completedTodo: this.completedTodo,
+        editItem: this.editItem
+      
+      };
+    
+      render() {
         console.log(this.state.todos)
         const { children } = this.props;
+        const { todos } = this.state;
         return (
-            <div>
-                <TodoContext.Provider value={this.state}>
-                    {children}
-                </TodoContext.Provider>
-            </div>
-        )
+          <div>
+            <h1>You have {todos.length} To Do</h1>
+            <TodoContext.Provider value={this.state}>
+              {children}
+            </TodoContext.Provider>
+          </div>
+        );
+      }
     }
-
-}
-
-export default Todos;
+    
+    export default Todos;
+    
