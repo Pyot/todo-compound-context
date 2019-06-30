@@ -4,7 +4,7 @@ import './App.css';
 
 function App() {
   return (
-    <div className="App">
+    <div className="App container mt-5">
         <Todos>
           <Todos.Control/>
           <Todos.TodoList>
@@ -15,9 +15,7 @@ function App() {
                <Todos.Text text={todo.text} />
                <Todos.Completed completed={todo.completed} />
                <Todos.Remove todoId={todo.id}/>
-
             </Todos.Item>
-              
           ))}
           </Todos.TodoList>
       </Todos>

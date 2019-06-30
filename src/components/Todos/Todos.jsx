@@ -189,11 +189,9 @@ class Todos extends Component {
     const { children } = this.props;
 
     return (
-      <div>
         <TodoContext.Provider value={this.state}>
           {children}
         </TodoContext.Provider>
-      </div>
     );
   }
 }
