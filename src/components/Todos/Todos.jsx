@@ -55,6 +55,7 @@ class Todos extends Component {
       } else if(checkboxIncompleted === !item.completed && checkboxIncompleted === true){
         return item
       }
+      return undefined
     })
 
     updatedTodos = updatedTodos.filter(item => {

@@ -7,7 +7,7 @@ const AddInput = () => (
     {({ input, updateInput, addTodo, searchList, updateCheckbox, checkboxAll, checkboxCompleted, checkboxIncompleted }) => (
       <>
         <InputGroup>
-          <Input className={"col-4"} type="text" value={input} onChange={updateInput} />
+          <Input className={"col-4"} type="text" value={input} onChange={updateInput} onKeyDown={(e) => e.key === 'Enter' && addTodo()} />
           <InputGroupAddon addonType="append">
             <InputGroupText onClick={addTodo}>Add</InputGroupText>
           </InputGroupAddon>
