@@ -6,7 +6,7 @@ import TimeStamp from './TimeStamp'
 import TextItem from "./TextItem"
 import Completed from "./Completed"
 import Remove from "./Remove"
-import DndList from "./DndList"
+import Dnd from "./Dnd"
 
 
 import { v4 } from 'uuid'
@@ -25,7 +25,7 @@ class Todos extends Component {
   static Text = TextItem;
   static Completed = Completed;
   static Remove = Remove;
-  static DndList = DndList;
+  static Dnd = Dnd;
 
   componentWillMount() {
     this.setState({ todosFilter: this.state.todos })
@@ -163,8 +163,9 @@ class Todos extends Component {
   }
 
   onSortEnd = ({oldIndex, newIndex}) => {
-    this.setState(({todosFilter}) => ({
+    this.setState(({todosFilter, todos}) => ({
       todosFilter: arrayMove(todosFilter, oldIndex, newIndex),
+      todos: arrayMove(todos, oldIndex, newIndex)
     }));
   };
 
