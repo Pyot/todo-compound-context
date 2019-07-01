@@ -14,7 +14,7 @@ $ npm start
 
 ### Branches
 
-The ToDo project has got 4 branches:
+The ToDo project has got 5 branches:
 
 1. `features/app-logic` - where you can see whole logic without too much styling
 
@@ -23,6 +23,8 @@ The ToDo project has got 4 branches:
 3. `fatures/drag-and-drop` - drag and drop functionality has been added on that branch. I selected to that a [react-sortable-hoc](https://github.com/clauderic/react-sortable-hoc "react-sortable-hoc")
 
 4. `features/local-storage` - todo array is added to the browser local storage. 
+
+5. `master` - where you can see the most updated app.
 
 ### Features
 
