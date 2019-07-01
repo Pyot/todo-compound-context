@@ -28,19 +28,28 @@ class Todos extends Component {
   static Dnd = Dnd;
 
   componentWillMount() {
-    this.setState({ todosFilter: this.state.todos })
+    const localStorageTodos = JSON.parse(localStorage.getItem('todos'));
+    if (localStorageTodos) {
+      this.setState({
+        todosFilter: localStorageTodos,
+        todos: localStorageTodos
+      })
+    } else {
+      this.setState({ todosFilter: this.state.todos })
+
+    }
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (prevState.todos !== this.state.todos) {
       this.updateTodo();
     };
-    if(prevState.checkboxAll !== this.state.checkboxAll || 
-      prevState.checkboxCompleted !== this.state.checkboxCompleted || 
-      prevState.checkboxIncompleted !== this.state.checkboxIncompleted){
-        this.updateTodo();
-      }
-    if(prevState.search !== this.state.search){
+    if (prevState.checkboxAll !== this.state.checkboxAll ||
+      prevState.checkboxCompleted !== this.state.checkboxCompleted ||
+      prevState.checkboxIncompleted !== this.state.checkboxIncompleted) {
+      this.updateTodo();
+    }
+    if (prevState.search !== this.state.search) {
       this.updateTodo();
     }
   }
@@ -48,15 +57,15 @@ class Todos extends Component {
   updateTodo = () => {
     // It's updating a todosFilter array according on a search phrase and a checkbox filters.  
     let updatedTodos = [...this.state.todos];
-    const { checkboxAll, checkboxCompleted, checkboxIncompleted, search} = this.state
+    const { checkboxAll, checkboxCompleted, checkboxIncompleted, search } = this.state
 
     updatedTodos = updatedTodos.filter(item => {
-      if(checkboxAll === true || 
-        (checkboxAll === false && checkboxCompleted === false && checkboxIncompleted === false)){
+      if (checkboxAll === true ||
+        (checkboxAll === false && checkboxCompleted === false && checkboxIncompleted === false)) {
         return item
-      } else if(checkboxCompleted === item.completed && checkboxCompleted === true){
+      } else if (checkboxCompleted === item.completed && checkboxCompleted === true) {
         return item
-      } else if(checkboxIncompleted === !item.completed && checkboxIncompleted === true){
+      } else if (checkboxIncompleted === !item.completed && checkboxIncompleted === true) {
         return item
       }
       return undefined
@@ -68,8 +77,8 @@ class Todos extends Component {
     });
 
     let dnd;
-    if(search !== '' || 
-    (checkboxCompleted === true || checkboxIncompleted === true)){
+    if (search !== '' ||
+      (checkboxCompleted === true || checkboxIncompleted === true)) {
       dnd = true
     } else {
       dnd = false
@@ -79,22 +88,27 @@ class Todos extends Component {
       dndDisabled: dnd
     });
 
+    localStorage.setItem('todos', JSON.stringify(this.state.todos));
+
   }
 
   updateCheckbox = (e) => {
     let id = e.target.id
-    if(id === "checkbox-all"){
-      this.setState({checkboxAll: !this.state.checkboxAll,
+    if (id === "checkbox-all") {
+      this.setState({
+        checkboxAll: !this.state.checkboxAll,
         checkboxCompleted: false,
         checkboxIncompleted: false,
-        })
-    } else if(id === "checkbox-completed"){
-      this.setState({checkboxAll: false,
+      })
+    } else if (id === "checkbox-completed") {
+      this.setState({
+        checkboxAll: false,
         checkboxCompleted: !this.state.checkboxCompleted,
         checkboxIncompleted: false,
       })
-    } else if(id === "checkbox-incompleted"){
-      this.setState({checkboxAll: false,
+    } else if (id === "checkbox-incompleted") {
+      this.setState({
+        checkboxAll: false,
         checkboxCompleted: false,
         checkboxIncompleted: !this.state.checkboxIncompleted,
       })
@@ -102,9 +116,9 @@ class Todos extends Component {
   }
 
   searchList = (e) => {
-      this.setState({
-        search: e.target.value.toLowerCase(),
-      });
+    this.setState({
+      search: e.target.value.toLowerCase(),
+    });
   }
 
   updateInput = event => {
@@ -172,8 +186,8 @@ class Todos extends Component {
     })
   }
 
-  onSortEnd = ({oldIndex, newIndex}) => {
-    this.setState(({todosFilter, todos}) => ({
+  onSortEnd = ({ oldIndex, newIndex }) => {
+    this.setState(({ todosFilter, todos }) => ({
       todosFilter: arrayMove(todosFilter, oldIndex, newIndex),
       todos: arrayMove(todos, oldIndex, newIndex)
     }));
@@ -186,7 +200,7 @@ class Todos extends Component {
     checkboxCompleted: false,
     checkboxIncompleted: false,
     dndDisabled: false,
-    todos: [{ text:'Task 1', timestamp: '12/02/2019', completed: false, id: v4() },
+    todos: [{ text: 'Task 1', timestamp: '12/02/2019', completed: false, id: v4() },
     { text: 'Task 1', timestamp: '12/02/2019', completed: true, id: v4() },
     { text: 'Task 2', timestamp: '13/02/2019', completed: false, id: v4() },
     { text: 'Task 2', timestamp: '13/02/2019', completed: true, id: v4() },
@@ -210,9 +224,9 @@ class Todos extends Component {
     const { children } = this.props;
 
     return (
-        <TodoContext.Provider value={this.state}>
-          {children}
-        </TodoContext.Provider>
+      <TodoContext.Provider value={this.state}>
+        {children}
+      </TodoContext.Provider>
     );
   }
 }
