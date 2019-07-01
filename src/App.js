@@ -14,9 +14,9 @@ const SortableItem = SortableElement(({ todo }) =>
 const SortableList = SortableContainer(() => {
   return (
     <Todos.TodoList>
-      {({ todosFilter }) =>
+      {({ todosFilter, dndDisabled }) =>
         todosFilter.map((todo, index) => (
-          <SortableItem key={`item-${todo.id}`} index={index} todo={todo} />
+          <SortableItem disabled={dndDisabled} key={`item-${todo.id}`} index={index} todo={todo} />
         ))}
     </Todos.TodoList>
   );
@@ -28,9 +28,7 @@ function App() {
       <Todos>
         <Todos.Control />
         <Todos.Dnd>
-          {({ onSortEnd }) => {
-            return <SortableList  distance={5} onSortEnd={onSortEnd} />
-          }}
+          {({ onSortEnd }) => <SortableList distance={5} onSortEnd={onSortEnd} />}
         </Todos.Dnd>
       </Todos>
     </div>

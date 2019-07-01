@@ -23,7 +23,7 @@ import {
 
 const ControlView = ({ toggle, isOpen }) => (
   <TodoConsumer>
-    {({ input, updateInput, addTodo, searchList, updateCheckbox, checkboxAll, checkboxCompleted, checkboxIncompleted }) => (
+    {({ input, updateInput, addTodo, searchList, updateCheckbox, checkboxAll, checkboxCompleted, checkboxIncompleted, dndDisabled }) => (
       <>
         <Navbar color="navbar-dark bg-primary" light expand="md">
           <NavbarBrand href="/">ToDo</NavbarBrand>
@@ -79,6 +79,11 @@ const ControlView = ({ toggle, isOpen }) => (
                   {checkboxAll || (!checkboxAll && !checkboxCompleted && !checkboxIncompleted) ? <Badge color="info">All</Badge> : ''}
                   {checkboxCompleted && <Badge color="info">Completed</Badge>}
                   {checkboxIncompleted && <Badge color="info">Incompleted</Badge>}
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink disabled>
+                  {dndDisabled ? <Badge color="danger">Drag and drop OFF</Badge> : <Badge color="success">Drag and drop ON</Badge>}
                 </NavLink>
               </NavItem>
             </Nav>
