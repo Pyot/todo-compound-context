@@ -31,7 +31,7 @@ The ToDo project has got 5 branches:
 ![](http://skx.ovh/img/todo-info.png)
 
 - User can add todo items - To add a task, please use input **(1)**, to acknowledge press an enter or an add button.
-- Todo can be edited - To edit please double click on task name **(2)**.
+- Todo can be edited - To edit please double click on task name **(2)**, to acknowledge press an enter.
 - Todo can be removed - To remove todo please click on the red remove button **(3)**.
 - User can mark todos as “complete” - To change it to completed please click on the checkbox **(4)**.
 - User can see filtered todos: all, complete, incomplete - Please click on **(5)** Show only drop-down list on the navigation bar and select the correct checkbox.
