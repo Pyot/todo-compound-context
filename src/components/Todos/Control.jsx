@@ -13,7 +13,6 @@ import {
   NavbarBrand,
   Nav,
   NavItem,
-  NavLink,
   UncontrolledDropdown,
   DropdownToggle,
   DropdownMenu,
@@ -30,7 +29,7 @@ const ControlView = ({ toggle, isOpen }) => (
           <NavbarToggler onClick={toggle} />
           <Collapse isOpen={isOpen} navbar>
             <Nav className="mr-auto" navbar>
-              <NavItem>
+              <NavItem className="mb-2 mt-2 mb-md-0">
                 <InputGroup>
                   <Input type="text" value={input} onChange={updateInput} onKeyDown={(e) => e.key === 'Enter' && addTodo()} placeholder="Add new task" />
                   <InputGroupAddon addonType="append">
@@ -38,12 +37,12 @@ const ControlView = ({ toggle, isOpen }) => (
                   </InputGroupAddon>
                 </InputGroup>
               </NavItem>
-              <NavItem>
+              <NavItem className="mb-2 mt-2 mb-md-0">
                 <InputGroup >
-                  <Input className={'ml-5'} type="text" onChange={searchList} placeholder="Search task..." />
+                  <Input className="ml-5" type="text" onChange={searchList} placeholder="Search task..." />
                 </InputGroup>
               </NavItem>
-              <UncontrolledDropdown className={'ml-3'} nav inNavbar>
+              <UncontrolledDropdown className="mb-2 mt-2 mb-md-0 ml-3" nav inNavbar>
                 <DropdownToggle nav caret>
                   Show tasks:
                 </DropdownToggle>
@@ -75,16 +74,16 @@ const ControlView = ({ toggle, isOpen }) => (
                 </DropdownMenu>
               </UncontrolledDropdown>
               <NavItem>
-                <NavLink disabled>
+                <span className="navbar-text ml-3 mr-3">
                   {checkboxAll || (!checkboxAll && !checkboxCompleted && !checkboxIncompleted) ? <Badge color="info">All</Badge> : ''}
                   {checkboxCompleted && <Badge color="info">Completed</Badge>}
                   {checkboxIncompleted && <Badge color="info">Incompleted</Badge>}
-                </NavLink>
+                </span>
               </NavItem>
               <NavItem>
-                <NavLink disabled>
+                <span className="navbar-text ml-3 mr-3">
                   {dndDisabled ? <Badge color="danger">Drag and drop OFF</Badge> : <Badge color="success">Drag and drop ON</Badge>}
-                </NavLink>
+                </span>
               </NavItem>
             </Nav>
           </Collapse>

@@ -2,10 +2,10 @@ import React from "react";
 import { TodoConsumer } from "./Todos";
 import { Button } from "reactstrap";
 
-const Remove = () => (
+const Remove = () =>
   <TodoConsumer>
-    {({ removeTodo }) => <Button className="ml-3 mr-3 btn-sm" color="danger" onClick={(e)=>{removeTodo(e)}}>Remove</Button>}
+    {({ removeTodo }) => <Button className="ml-3 mr-3 btn-sm" color="danger" onClick={(e) => { removeTodo(e) }}>Remove</Button>}
   </TodoConsumer>
-);
+
 
 export default Remove;

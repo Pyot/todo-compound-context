@@ -8,14 +8,11 @@ import Completed from "./Completed"
 import Remove from "./Remove"
 import Dnd from "./Dnd"
 
-
 import { v4 } from 'uuid'
 import arrayMove from 'array-move';
 
-
 const TodoContext = createContext();
 export const TodoConsumer = TodoContext.Consumer;
-
 
 class Todos extends Component {
   static Control = Control;
@@ -55,7 +52,7 @@ class Todos extends Component {
   }
 
   updateTodo = () => {
-    // It's updating a todosFilter array according on a search phrase and a checkbox filters.  
+    // It's updating a todosFilter array according to a search phrase, a checkbox filters and is updating the local storage.  
     let updatedTodos = [...this.state.todos];
     const { checkboxAll, checkboxCompleted, checkboxIncompleted, search } = this.state
 
@@ -89,7 +86,6 @@ class Todos extends Component {
     });
 
     localStorage.setItem('todos', JSON.stringify(this.state.todos));
-
   }
 
   updateCheckbox = (e) => {
@@ -121,8 +117,8 @@ class Todos extends Component {
     });
   }
 
-  updateInput = event => {
-    const { value } = event.target;
+  updateInput = (e) => {
+    const { value } = e.target;
     this.setState({ input: value });
   };
 
@@ -220,7 +216,6 @@ class Todos extends Component {
   };
 
   render() {
-    console.log(this.state.todos)
     const { children } = this.props;
 
     return (
