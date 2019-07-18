@@ -54,7 +54,7 @@ class Todos extends Component {
   updateTodo = () => {
     // It's updating a todosFilter array according to a search phrase, a checkbox filters and is updating the local storage.  
     let updatedTodos = [...this.state.todos];
-    const { checkboxAll, checkboxCompleted, checkboxIncompleted, search } = this.state
+    const { checkboxAll, checkboxCompleted, checkboxIncompleted } = this.state
 
     updatedTodos = updatedTodos.filter(item => {
       if (checkboxAll === true ||
@@ -73,16 +73,8 @@ class Todos extends Component {
         this.state.search) !== -1;
     });
 
-    let dnd;
-    if (search !== '' ||
-      (checkboxCompleted === true || checkboxIncompleted === true)) {
-      dnd = true
-    } else {
-      dnd = false
-    }
     this.setState({
-      todosFilter: updatedTodos,
-      dndDisabled: dnd
+      todosFilter: updatedTodos
     });
 
     localStorage.setItem('todos', JSON.stringify(this.state.todos));
@@ -94,26 +86,22 @@ class Todos extends Component {
       this.setState({
         checkboxAll: !this.state.checkboxAll,
         checkboxCompleted: false,
-        checkboxIncompleted: false,
-      })
-    } else if (id === "checkbox-completed") {
-      this.setState({
-        checkboxAll: false,
+        checkboxIncompleted: false
+        })
+    } else if(id === "checkbox-completed"){
+      this.setState({checkboxAll: false,
         checkboxCompleted: !this.state.checkboxCompleted,
-        checkboxIncompleted: false,
-      })
-    } else if (id === "checkbox-incompleted") {
-      this.setState({
-        checkboxAll: false,
+        checkboxIncompleted: false})
+    } else if(id === "checkbox-incompleted"){
+      this.setState({checkboxAll: false,
         checkboxCompleted: false,
-        checkboxIncompleted: !this.state.checkboxIncompleted,
-      })
+        checkboxIncompleted: !this.state.checkboxIncompleted})
     }
   }
 
   searchList = (e) => {
     this.setState({
-      search: e.target.value.toLowerCase(),
+      search: e.target.value.toLowerCase()
     });
   }
 
@@ -203,6 +191,7 @@ class Todos extends Component {
     { text: 'Alabama', timestamp: '13/02/2019', completed: true, id: v4() },
     { text: 'Czestochowa', timestamp: '13/02/2019', completed: false, id: v4() },
     { text: 'Warszawa', timestamp: '13/02/2019', completed: true, id: v4() },
+
     { text: 'New York', timestamp: '13/02/2019', completed: false, id: v4() }],
     todosFilter: [],
     updateInput: this.updateInput,
@@ -212,7 +201,8 @@ class Todos extends Component {
     editItem: this.editItem,
     searchList: this.searchList,
     updateCheckbox: this.updateCheckbox,
-    onSortEnd: this.onSortEnd,
+    onSortEnd: this.onSortEnd
+
   };
 
   render() {
