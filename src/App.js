@@ -1,12 +1,11 @@
 import React from 'react';
-import Todos from './components/Todos/Todos';
+import Todos from 'containers/Todos';
 import './App.css';
 
 function App() {
   return (
     <div className="App container mt-5">
       <Todos>
-        sdfsd
         <Todos.Control />
         <Todos.TodoList>
           {({ todosFilter }) =>
