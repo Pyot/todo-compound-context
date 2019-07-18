@@ -6,7 +6,6 @@ import TimeStamp from './TimeStamp'
 import TextItem from "./TextItem"
 import Completed from "./Completed"
 import Remove from "./Remove"
-import Dnd from "./Dnd"
 
 import { v4 } from 'uuid'
 import arrayMove from 'array-move';
@@ -22,7 +21,6 @@ class Todos extends Component {
   static Text = TextItem;
   static Completed = Completed;
   static Remove = Remove;
-  static Dnd = Dnd;
 
   componentWillMount() {
     const localStorageTodos = JSON.parse(localStorage.getItem('todos'));
@@ -170,10 +168,9 @@ class Todos extends Component {
     })
   }
 
-  onSortEnd = ({ oldIndex, newIndex }) => {
-    this.setState(({ todosFilter, todos }) => ({
+  onSortEnd = ({oldIndex, newIndex}) => {
+    this.setState(({todosFilter}) => ({
       todosFilter: arrayMove(todosFilter, oldIndex, newIndex),
-      todos: arrayMove(todos, oldIndex, newIndex)
     }));
   };
 
