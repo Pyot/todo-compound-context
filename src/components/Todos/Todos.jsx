@@ -7,8 +7,8 @@ import TextItem from "./TextItem"
 import Completed from "./Completed"
 import Remove from "./Remove"
 
+
 import { v4 } from 'uuid'
-import arrayMove from 'array-move';
 
 const TodoContext = createContext();
 export const TodoConsumer = TodoContext.Consumer;
@@ -168,12 +168,6 @@ class Todos extends Component {
     })
   }
 
-  onSortEnd = ({oldIndex, newIndex}) => {
-    this.setState(({todosFilter}) => ({
-      todosFilter: arrayMove(todosFilter, oldIndex, newIndex),
-    }));
-  };
-
   state = {
     input: "",
     search: "",
@@ -197,8 +191,7 @@ class Todos extends Component {
     completedTodo: this.completedTodo,
     editItem: this.editItem,
     searchList: this.searchList,
-    updateCheckbox: this.updateCheckbox,
-    onSortEnd: this.onSortEnd
+    updateCheckbox: this.updateCheckbox
 
   };
 
